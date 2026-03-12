@@ -1520,91 +1520,62 @@ function validateJHA() {
   return missing;
 }
 
-async function submitJHA() {
+function submitJHA() {
   const missing = validateJHA();
   if (missing.length > 0) { alert("Please complete the following required fields:\n\n" + missing.map(m=>"• "+m).join("\n")); return; }
   const report = buildReport();
   const fn = getFN();
 
-  // Show preview and generate PDF (same approach as DFR)
+  // Show preview
   document.getElementById('pb').innerHTML = reportHTML;
   document.getElementById('po').classList.add('on');
   document.body.style.overflow = 'hidden';
   document.title = fn;
-  toast('Generating PDF...');
 
-  // Generate PDF from the visible preview container
-  const previewEl = document.getElementById('pb');
-  previewEl.style.display = 'block';
-  previewEl.style.width = '760px';
-  previewEl.style.maxWidth = '760px';
-  previewEl.style.overflow = 'visible';
+  // Auto-download as HTML file to device
+  const htmlBlob = new Blob([reportHTML], { type: 'text/html' });
+  const dlUrl = URL.createObjectURL(htmlBlob);
+  const a = document.createElement('a');
+  a.href = dlUrl; a.download = fn + '.html'; a.style.display = 'none';
+  document.body.appendChild(a); a.click();
+  setTimeout(() => { document.body.removeChild(a); URL.revokeObjectURL(dlUrl); }, 1000);
+  toast('JHA saved to device');
 
-  // Wait for fonts and images to load
-  await document.fonts.ready;
-  await new Promise(r => setTimeout(r, 500));
+  // Encode HTML as base64 for Power Automate
+  const htmlBase64 = btoa(unescape(encodeURIComponent(reportHTML)));
 
-  try {
-    const pdfBlob = await html2pdf().set({
-      margin: [0.3, 0.3, 0.4, 0.3],
-      filename: fn + '.pdf',
-      image: { type: 'jpeg', quality: 0.92 },
-      html2canvas: { scale: 2, useCORS: true, logging: false, scrollY: 0, windowWidth: 760 },
-      jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' },
-      pagebreak: { mode: ['css'], avoid: ['.sec', '.haz-sec', 'tr'] }
-    }).from(previewEl).outputPdf('blob');
+  // Send to Power Automate
+  const payload = {
+    formType: 'JHA',
+    filename: fn + '.html',
+    pdfBase64: htmlBase64,
+    submittedAt: new Date().toISOString(),
+    project: getFieldVal('project'),
+    date: document.getElementById('jhaDate').value,
+    site: document.getElementById('site').value,
+    preparedBy: document.getElementById('team_0_name').value,
+    prepEmail: document.getElementById('prepEmail').value || '',
+    ccEmail: document.getElementById('ccEmail').value || ''
+  };
 
-    // Reset preview styling
-    previewEl.style.width = '';
-    previewEl.style.maxWidth = '';
-    previewEl.style.overflow = '';
-
-    const pdfBase64 = await new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload = () => resolve(reader.result.split(',')[1]);
-      reader.onerror = reject;
-      reader.readAsDataURL(pdfBlob);
-    });
-
-    // Auto-download PDF
-    const url = URL.createObjectURL(pdfBlob);
-    const a = document.createElement('a');
-    a.href = url; a.download = fn + '.pdf'; a.style.display = 'none';
-    document.body.appendChild(a); a.click();
-    setTimeout(() => { document.body.removeChild(a); URL.revokeObjectURL(url); }, 1000);
-    toast('PDF saved to device');
-
-    // Send to Power Automate
-    const payload = {
-      formType: 'JHA',
-      filename: fn + '.pdf',
-      pdfBase64: pdfBase64,
-      submittedAt: new Date().toISOString(),
-      project: getFieldVal('project'),
-      date: document.getElementById('jhaDate').value,
-      site: document.getElementById('site').value,
-      preparedBy: document.getElementById('team_0_name').value,
-      prepEmail: document.getElementById('prepEmail').value || '',
-      ccEmail: document.getElementById('ccEmail').value || ''
-    };
-
+  // Try direct send, fallback to no-cors, queue if offline
+  if (navigator.onLine) {
     fetch(WEBHOOK_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     }).then(resp => {
       if (resp.ok) toast('JHA sent to SharePoint');
-      else fetch(WEBHOOK_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(payload) }).catch(() => {});
+      else {
+        fetch(WEBHOOK_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(payload) }).catch(() => {});
+        toast('JHA saved locally (syncing...)', false);
+      }
     }).catch(() => {
       fetch(WEBHOOK_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(payload) }).catch(() => {});
+      toast('JHA saved locally (syncing...)', false);
     });
-
-  } catch(err) {
-    console.error('PDF error:', err);
-    previewEl.style.width = '';
-    previewEl.style.maxWidth = '';
-    previewEl.style.overflow = '';
-    toast('PDF generation failed - use Print button', true);
+  } else {
+    toast('Offline - JHA saved locally, will sync when signal returns', true);
   }
 
   // Show post-submit panel

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'jha-v4d';
+const CACHE_NAME = 'jha-v5';
 const ASSETS = [
   './',
   './index.html',
