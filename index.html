@@ -1529,7 +1529,7 @@ function submitJHA() {
   // Generate PDF from report HTML using hidden iframe
   toast('Generating PDF...');
   const iframe = document.createElement('iframe');
-  iframe.style.cssText = 'position:fixed;left:-9999px;top:0;width:850px;height:2000px;border:none';
+  iframe.style.cssText = 'position:fixed;left:0;top:0;width:850px;height:2000px;border:none;opacity:0;z-index:-1;pointer-events:none';
   document.body.appendChild(iframe);
   iframe.contentDocument.open();
   iframe.contentDocument.write(reportHTML);
