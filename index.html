@@ -12,7 +12,7 @@
 :root{--g900:#1a3a0a;--g800:#2d5a14;--g700:#3d6b1a;--g600:#4a7a20;--g500:#5b8c2a;--g400:#7db043;--g300:#a3cc6e;--g200:#d4e8b8;--g100:#eaf4dc;--g50:#f5faf0;--r600:#c0392b;--r100:#fde8e5;--y600:#e67e22;--y100:#fef5e7;--d900:#111;--d800:#1e1e1e;--d700:#2a2a2a;--d600:#444;--d500:#666;--d400:#888;--d300:#aaa;--d200:#ccc;--d100:#e8e8e8;--d50:#f4f4f4;--w:#fff;--sh-s:0 1px 3px rgba(0,0,0,.06);--sh-m:0 4px 16px rgba(0,0,0,.08);--sh-l:0 8px 30px rgba(0,0,0,.12);--r:10px;--rl:14px}
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Outfit',sans-serif;background:var(--d50);color:var(--d800);line-height:1.5;-webkit-font-smoothing:antialiased}
- 
+
 .app-hdr{background:linear-gradient(135deg,var(--g800),var(--g600));color:var(--w);padding:16px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:var(--sh-m)}
 .logo-area{display:flex;align-items:center;gap:12px}
 .logo-text h1{font-size:17px;font-weight:700;letter-spacing:-.3px;line-height:1.2}
@@ -22,11 +22,11 @@ body{font-family:'Outfit',sans-serif;background:var(--d50);color:var(--d800);lin
 .btn-w{background:var(--w);color:var(--g700)}.btn-w:hover{background:var(--g50);transform:translateY(-1px)}
 .btn-g{background:rgba(255,255,255,.12);color:var(--w);border:1px solid rgba(255,255,255,.25)}.btn-g:hover{background:rgba(255,255,255,.22)}
 .btn-green{background:var(--g600);color:var(--w)}.btn-green:hover{background:var(--g500)}
- 
- 
+
+
 .ctn{max-width:860px;margin:0 auto;padding:20px 14px 90px}
 .doc-ref{text-align:right;font-size:10px;color:var(--d400);font-family:'JetBrains Mono',monospace;margin-bottom:10px}
- 
+
 .sec{background:var(--w);border-radius:var(--rl);box-shadow:var(--sh-s);margin-bottom:16px;overflow:hidden;border:1px solid var(--d100)}
 .sec-h{background:var(--g700);color:var(--w);padding:13px 18px;font-size:14px;font-weight:700;letter-spacing:.3px;display:flex;align-items:center;gap:9px}
 .sec-h .ic{font-size:17px}
@@ -37,7 +37,7 @@ body{font-family:'Outfit',sans-serif;background:var(--d50);color:var(--d800);lin
 .dt{width:30px;height:28px;border:1px solid transparent;border-radius:5px;background:none;cursor:pointer;font-size:15px;color:var(--d600);display:flex;align-items:center;justify-content:center;padding:0;transition:all .15s}
 .dt:hover{background:var(--d100);color:var(--d800)}
 .dt.active{background:var(--g500);color:#fff;border-color:var(--g600)}
- 
+
 .fg{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .fg.c3{grid-template-columns:1fr 1fr 1fr}
 .fg .full{grid-column:1/-1}
@@ -46,7 +46,7 @@ body{font-family:'Outfit',sans-serif;background:var(--d50);color:var(--d800);lin
 .fi input,.fi select,.fi textarea{font-family:inherit;font-size:14px;padding:10px 12px;border:1.5px solid var(--d200);border-radius:8px;background:var(--w);color:var(--d800);transition:border .15s,box-shadow .15s}
 .fi input:focus,.fi select:focus,.fi textarea:focus{outline:none;border-color:var(--g400);box-shadow:0 0 0 3px rgba(91,140,42,.1)}
 .fi textarea{resize:vertical;min-height:70px}
- 
+
 .dd-wrap{position:relative}
 .dd-wrap select,.dd-wrap input.oth-in{width:100%}
 .oth-tog{display:flex;align-items:center;gap:5px;margin-top:4px;cursor:pointer;user-select:none}
@@ -55,7 +55,7 @@ body{font-family:'Outfit',sans-serif;background:var(--d50);color:var(--d800);lin
 .oth-in{display:none}
 .dd-wrap.oth-on select{display:none}
 .dd-wrap.oth-on .oth-in{display:block}
- 
+
 /* Team sign-in table */
 .team-tbl{width:100%;border-collapse:collapse;font-size:13px}
 .team-tbl th{background:var(--g100);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:var(--g700);padding:8px 10px;text-align:left;border-bottom:2px solid var(--g200)}
@@ -64,12 +64,12 @@ body{font-family:'Outfit',sans-serif;background:var(--d50);color:var(--d800);lin
 .team-tbl input:focus{outline:none;border-color:var(--g400);box-shadow:0 0 0 3px rgba(91,140,42,.08)}
 .team-tbl .role{font-size:11px;font-weight:600;color:var(--d500);white-space:nowrap}
 .team-note{font-size:10px;color:var(--d400);font-style:italic;text-align:right;margin-top:6px}
- 
+
 /* Signature canvas */
 .sig-canvas-wrap{position:relative;width:100%;height:60px;border:1.5px solid var(--d200);border-radius:6px;background:var(--d50);cursor:crosshair}
 .sig-canvas-wrap canvas{width:100%;height:100%;border-radius:5px;touch-action:none}
 .sig-clear{position:absolute;top:3px;right:5px;font-size:9px;color:var(--r600);cursor:pointer;font-weight:700;background:var(--w);border:1px solid var(--d200);border-radius:4px;padding:1px 5px}
- 
+
 /* Yes/No toggle */
 .yn-row{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--d100)}
 .yn-row:last-child{border-bottom:none}
@@ -78,7 +78,7 @@ body{font-family:'Outfit',sans-serif;background:var(--d50);color:var(--d800);lin
 .yn-btns button{padding:6px 14px;border:1.5px solid var(--d200);border-radius:6px;background:var(--w);font-family:inherit;font-size:12px;font-weight:600;cursor:pointer;color:var(--d500);transition:all .15s}
 .yn-btns button.sel-y{background:var(--g100);border-color:var(--g400);color:var(--g700)}
 .yn-btns button.sel-n{background:var(--r100);border-color:var(--r600);color:var(--r600)}
- 
+
 /* Hazard conditions */
 .haz-item{border:1.5px solid var(--d200);border-radius:var(--r);margin-bottom:8px;overflow:hidden;transition:border-color .15s}
 .haz-item.checked{border-color:var(--y600)}
@@ -98,7 +98,7 @@ body{font-family:'Outfit',sans-serif;background:var(--d50);color:var(--d800);lin
 .ctrl-list{display:flex;flex-direction:column;gap:4px}
 .ctrl-cb{display:flex;align-items:flex-start;gap:7px;font-size:12px;color:var(--d600);padding:4px 0;cursor:pointer}
 .ctrl-cb input[type=checkbox]{width:15px;height:15px;accent-color:var(--g500);cursor:pointer;flex-shrink:0;margin-top:1px}
- 
+
 /* Equipment checkboxes */
 .equip-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .equip-item{display:flex;align-items:center;gap:8px;padding:8px 10px;border:1.5px solid var(--d200);border-radius:8px;transition:all .15s}
@@ -107,7 +107,7 @@ body{font-family:'Outfit',sans-serif;background:var(--d50);color:var(--d800);lin
 .equip-item label{font-size:13px;color:var(--d700);cursor:pointer;flex:1}
 .equip-item input[type=text],.equip-item input[type=number]{width:80px;font-family:inherit;font-size:12px;padding:5px 8px;border:1px solid var(--d200);border-radius:5px}
 .equip-item input[type=text]:focus,.equip-item input[type=number]:focus{outline:none;border-color:var(--g400)}
- 
+
 /* Rescue table */
 .rescue-row{display:grid;grid-template-columns:1fr 2fr 1fr;gap:10px;padding:10px 0;border-bottom:1px solid var(--d100)}
 .rescue-row:last-child{border-bottom:none}
@@ -115,30 +115,30 @@ body{font-family:'Outfit',sans-serif;background:var(--d50);color:var(--d800);lin
 .rescue-row input,.rescue-row textarea{font-family:inherit;font-size:13px;padding:8px 10px;border:1.5px solid var(--d200);border-radius:6px;width:100%}
 .rescue-row textarea{min-height:60px;resize:vertical}
 .rescue-row input:focus,.rescue-row textarea:focus{outline:none;border-color:var(--g400);box-shadow:0 0 0 3px rgba(91,140,42,.08)}
- 
+
 /* Daily sign-in */
 .signin-row{display:grid;grid-template-columns:2fr 1fr repeat(4,1fr);gap:6px;padding:8px 0;border-bottom:1px solid var(--d100);align-items:center}
 .signin-row:last-child{border-bottom:none}
 .signin-row.hdr{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:var(--d400);padding-bottom:4px;border-bottom:2px solid var(--d200)}
 .signin-row input{font-family:inherit;font-size:12px;padding:6px 8px;border:1.5px solid var(--d200);border-radius:5px;width:100%}
 .signin-row input:focus{outline:none;border-color:var(--g400)}
- 
+
 .toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--g700);color:var(--w);padding:14px 24px;border-radius:var(--r);font-size:14px;font-weight:600;box-shadow:var(--sh-l);z-index:2000;transition:transform .3s ease;display:flex;align-items:center;gap:8px}
 .toast.show{transform:translateX(-50%) translateY(0)}
 .toast.error{background:var(--r600)}
- 
+
 #po{display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.55);overflow-y:auto}
 #po.on{display:block}
 #pc{max-width:820px;margin:24px auto;background:var(--w);border-radius:var(--rl);box-shadow:var(--sh-l);overflow:hidden}
 .pt{display:flex;justify-content:space-between;align-items:center;padding:14px 20px;background:var(--d50);border-bottom:1px solid var(--d200)}
 .pt h3{font-size:15px;color:var(--d800)}
 .pt .btns{display:flex;gap:8px;flex-wrap:wrap}
- 
+
 .add-row-btn{display:inline-flex;align-items:center;gap:5px;padding:7px 14px;border:1.5px dashed var(--g400);border-radius:8px;background:var(--g50);color:var(--g700);font-family:inherit;font-size:12px;font-weight:600;cursor:pointer;margin-top:8px;transition:all .15s}
 .add-row-btn:hover{background:var(--g100);border-style:solid}
- 
+
 .email-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
- 
+
 @media print{
   body{background:#fff !important;margin:0 !important;padding:0 !important}
   .app-hdr,.ctn,.toast,#po .pt{display:none!important}
@@ -175,17 +175,17 @@ body{font-family:'Outfit',sans-serif;background:var(--d50);color:var(--d800);lin
     <button class="btn btn-w" onclick="submitJHA()">📤 Submit JHA</button>
   </div>
 </div>
- 
+
 <div class="ctn">
 <div class="doc-ref">OMS_0010_JHA&amp;WorkPlan &bull; Rev 6 &bull; Approved: TB</div>
- 
+
 <!-- ═══════════ PAGE 1: PROJECT & TEAM ═══════════ -->
 <div class="sec">
   <div style="display:flex;align-items:center;gap:6px;padding:8px 14px;margin-bottom:12px;background:var(--r50,#fef2f2);border:1px solid var(--r200,#fecaca);border-radius:8px;font-size:11px;color:var(--r700,#b91c1c)">
     <span style="font-weight:700;font-size:14px">*</span>
     <span>Fields marked with a red asterisk are <strong>required for submission</strong>. The form will not submit until all required fields are completed.</span>
   </div>
- 
+
   <div class="sec-h"><span class="ic">📋</span> Project Information</div>
   <div class="sec-b">
     <div class="fg">
@@ -226,7 +226,7 @@ body{font-family:'Outfit',sans-serif;background:var(--d50);color:var(--d800);lin
     </div>
   </div>
 </div>
- 
+
 <!-- EMERGENCY INFO -->
 <div class="sec">
   <div class="sec-h red"><span class="ic">🚨</span> Emergency Information</div>
@@ -248,7 +248,7 @@ body{font-family:'Outfit',sans-serif;background:var(--d50);color:var(--d800);lin
     </div>
   </div>
 </div>
- 
+
 <!-- WIND ASSESSMENT -->
 <div class="sec">
   <div class="sec-h"><span class="ic">💨</span> Wind Assessment</div>
@@ -266,7 +266,7 @@ body{font-family:'Outfit',sans-serif;background:var(--d50);color:var(--d800);lin
     <div class="fi" style="margin-top:10px"><label>Site Specific Notes</label><textarea id="windNotes" placeholder="Wind conditions, observations..."></textarea></div>
   </div>
 </div>
- 
+
 <!-- WORKING OVER WATER -->
 <div class="sec">
   <div class="sec-h"><span class="ic">🌊</span> Working Over Water</div>
@@ -294,8 +294,8 @@ body{font-family:'Outfit',sans-serif;background:var(--d50);color:var(--d800);lin
     </div>
   </div>
 </div>
- 
- 
+
+
 <!-- ═══════════ PAGE 2: WORK SCOPE ═══════════ -->
 <div class="sec">
   <div class="sec-h"><span class="ic">🔧</span> Work Scope</div>
@@ -306,7 +306,7 @@ body{font-family:'Outfit',sans-serif;background:var(--d50);color:var(--d800);lin
     </div>
   </div>
 </div>
- 
+
 <!-- JOB/TASK EQUIPMENT (Parker's tweaks: text input fields) -->
 <div class="sec">
   <div class="sec-h"><span class="ic">🧰</span> Job / Task Equipment</div>
@@ -354,7 +354,7 @@ body{font-family:'Outfit',sans-serif;background:var(--d50);color:var(--d800);lin
     </div>
   </div>
 </div>
- 
+
 <!-- SDS -->
 <div class="sec">
   <div class="sec-h amber"><span class="ic">📄</span> SDS — Safety Data Sheets</div>
@@ -366,7 +366,7 @@ body{font-family:'Outfit',sans-serif;background:var(--d50);color:var(--d800);lin
     </div>
   </div>
 </div>
- 
+
 <!-- ANCHORS -->
 <div class="sec">
   <div class="sec-h"><span class="ic">⚓</span> Anchors</div>
@@ -374,7 +374,7 @@ body{font-family:'Outfit',sans-serif;background:var(--d50);color:var(--d800);lin
     <div class="fi"><label>Describe anchors to be used and locations</label><textarea id="anchors" placeholder="e.g. Crane beams above switch gear - entry deck" style="min-height:90px"></textarea></div>
   </div>
 </div>
- 
+
 <!-- LOTO (Parker's tweaks: text fields for permit # and supervisor) -->
 <div class="sec">
   <div class="sec-h amber"><span class="ic">🔒</span> LOTO — Lock Out / Tag Out</div>
@@ -393,7 +393,7 @@ body{font-family:'Outfit',sans-serif;background:var(--d50);color:var(--d800);lin
     </div>
   </div>
 </div>
- 
+
 <!-- CONFINED SPACE -->
 <div class="sec">
   <div class="sec-h amber"><span class="ic">🚪</span> Confined Space</div>
@@ -409,7 +409,7 @@ body{font-family:'Outfit',sans-serif;background:var(--d50);color:var(--d800);lin
     </div>
   </div>
 </div>
- 
+
 <!-- EQUIPMENT/TOOL MANAGEMENT -->
 <div class="sec">
   <div class="sec-h"><span class="ic">🔗</span> Equipment/Tool Management</div>
@@ -417,7 +417,7 @@ body{font-family:'Outfit',sans-serif;background:var(--d50);color:var(--d800);lin
     <div class="fi"><label class="req">How will Equipment/Tools be managed at height to ensure 100% tethering/tie off?</label><textarea id="toolMgmt" placeholder="Describe tool management plan..."></textarea></div>
   </div>
 </div>
- 
+
 <!-- POWER ASCENDER -->
 <div class="sec">
   <div class="sec-h"><span class="ic">⬆️</span> Power Ascender Use</div>
@@ -440,7 +440,7 @@ body{font-family:'Outfit',sans-serif;background:var(--d50);color:var(--d800);lin
     </div>
   </div>
 </div>
- 
+
 <!-- ACCESS ZONE / HAZARD ZONE -->
 <div class="sec">
   <div class="sec-h red"><span class="ic">⚠️</span> Work Zones - Rope Access</div>
@@ -455,8 +455,8 @@ body{font-family:'Outfit',sans-serif;background:var(--d50);color:var(--d800);lin
     </div>
   </div>
 </div>
- 
- 
+
+
 <!-- ═══════════ PAGE 3: RESCUE & RIGGING ═══════════ -->
 <div class="sec">
   <div class="sec-h red"><span class="ic">🆘</span> Rescue Planning</div>
@@ -483,7 +483,7 @@ body{font-family:'Outfit',sans-serif;background:var(--d50);color:var(--d800);lin
     <button class="add-row-btn" onclick="addRescueRow()">+ Add Location</button>
   </div>
 </div>
- 
+
 <div class="sec">
   <div class="sec-h"><span class="ic">📐</span> Rigging Plan</div>
   <div class="sec-b">
@@ -529,8 +529,8 @@ body{font-family:'Outfit',sans-serif;background:var(--d50);color:var(--d800);lin
     </div>
   </div>
 </div>
- 
- 
+
+
 <!-- ═══════════ PAGES 4-5: HAZARD CONDITIONS (CONDITIONAL) ═══════════ -->
 <div class="sec">
   <div class="sec-h amber"><span class="ic">⚠️</span> Hazard Conditions — Check all that apply</div>
@@ -565,8 +565,8 @@ body{font-family:'Outfit',sans-serif;background:var(--d50);color:var(--d800);lin
     </div>
   </div>
 </div>
- 
- 
+
+
 <!-- ═══════════ TEAM SIGN-IN (moved to end so team reads full JHA first) ═══════════ -->
 <div class="sec">
   <div class="sec-h"><span class="ic">👥</span> Team Sign-In</div>
@@ -588,8 +588,8 @@ body{font-family:'Outfit',sans-serif;background:var(--d50);color:var(--d800);lin
     </table>
   </div>
 </div>
- 
- 
+
+
 <!-- ═══════════ PAGE 6: LESSONS LEARNED & CLOSE-OUT ═══════════ -->
 <div class="sec">
   <div class="sec-h"><span class="ic">📝</span> Lessons Learned</div>
@@ -597,7 +597,7 @@ body{font-family:'Outfit',sans-serif;background:var(--d50);color:var(--d800);lin
     <div class="fi"><label>Safety Considerations — Were adequate safety measures taken to ensure the safety of personnel and public? Note any additional safety measures taken or recommended for future tasks/specific job.</label><textarea id="lessonsLearned" placeholder="Document lessons learned, safety observations, recommendations..." style="min-height:120px"></textarea></div>
   </div>
 </div>
- 
+
 <div class="sec">
   <div class="sec-h"><span class="ic">✅</span> Close-Out — Supervisor Sign-Off</div>
   <div class="sec-b">
@@ -611,7 +611,7 @@ body{font-family:'Outfit',sans-serif;background:var(--d50);color:var(--d800);lin
     </div>
   </div>
 </div>
- 
+
 <!-- EMAIL & SUBMIT -->
 <div class="sec">
   <div class="sec-h"><span class="ic">📧</span> Email & Submit</div>
@@ -622,15 +622,15 @@ body{font-family:'Outfit',sans-serif;background:var(--d50);color:var(--d800);lin
     </div>
   </div>
 </div>
- 
+
 <div style="text-align:center;padding:18px 0">
   <button class="btn btn-green" onclick="submitJHA()" style="font-size:15px;padding:14px 32px">📤 Submit JHA</button>
 </div>
 </div>
- 
+
 <!-- TOAST -->
 <div class="toast" id="toast"></div>
- 
+
 <!-- POST-SUBMIT PANEL -->
 <div id="postSubmit" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:9999;align-items:center;justify-content:center;padding:20px">
   <div style="background:#fff;border-radius:14px;max-width:440px;width:100%;padding:28px;text-align:center;box-shadow:0 12px 40px rgba(0,0,0,.25)">
@@ -642,7 +642,7 @@ body{font-family:'Outfit',sans-serif;background:var(--d50);color:var(--d800);lin
     <button onclick="closePostSubmit()" style="width:100%;padding:12px;font-size:13px;font-weight:600;color:var(--d600);background:var(--d50);border:1px solid var(--d200);border-radius:8px;cursor:pointer">Done — Return to Form</button>
   </div>
 </div>
- 
+
 <!-- PRINT OVERLAY -->
 <div id="po">
   <div id="pc">
@@ -656,8 +656,8 @@ body{font-family:'Outfit',sans-serif;background:var(--d50);color:var(--d800);lin
     <div id="pb"></div>
   </div>
 </div>
- 
- 
+
+
 <script>
 /*
 ╔══════════════════════════════════════════════════════════════════╗
@@ -670,7 +670,7 @@ body{font-family:'Outfit',sans-serif;background:var(--d50);color:var(--d800);lin
 ║                                                                  ║
 ╚══════════════════════════════════════════════════════════════════╝
 */
- 
+
 const MASTER = {
   projects: [
     "2603_Blattner_SunZia_ClinesCornersNM_DeckReplacement_Onshore",
@@ -711,11 +711,11 @@ const MASTER = {
     { name: "Todd Bentley", email: "todd@optimumras.com", phone: "" },
   ],
 };
- 
-const WEBHOOK_URL = "PASTE_YOUR_POWER_AUTOMATE_URL_HERE";
- 
+
+const WEBHOOK_URL = "https://default48cc6af00072430fa8a19178d1b272.f7.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/f91c58df7bf04a0f8a999363fa357243/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=dZTNJCpdsrkFI4THBXuNPe3OEEQjyom4cRG7BBlmKAg";
+
 /* ═══════════ END OF EDITABLE SECTION ═══════════ */
- 
+
 /*
 ╔══════════════════════════════════════════════════════════════════╗
 ║   HAZARD CONDITIONS — OMS_0010 Rev 6                            ║
@@ -749,19 +749,19 @@ const HAZARDS = [
   { name:"Bird & Animal Feces", hazards:["Possible inhalation of disease carried by feces"], controls:["Workers may need to wear proper PPE or respirators"] },
   { name:"Constricted Work Areas While in Suspension", hazards:["Bodily Injury (from rope access equipment, tools, or components)","Entanglement","Gear Damage"], controls:["Verify use of specialized equipment is used according to company policy and any site-specific training","Always use work positioners to extend power ascenders or other gear away from the body while in constricted areas (ladder wells, platform transition & hatches, etc)","Prioritize climbing vs using Power Ascender"] },
 ];
- 
+
 /* ═══════════ END OF HAZARD DATA ═══════════ */
- 
+
 // ─── STATE ───
 let reportHTML = '';
 const sigPads = {};
- 
+
 // ─── INIT ───
 function init() {
   document.getElementById('jhaDate').valueAsDate = new Date();
   const now = new Date();
   document.getElementById('jhaTime').value = now.getHours().toString().padStart(2,'0') + ':' + now.getMinutes().toString().padStart(2,'0');
- 
+
   // Populate dropdowns
   populateSelect('sel_project', MASTER.projects);
   populateSelect('sel_client', MASTER.clients);
@@ -769,16 +769,16 @@ function init() {
   populateSelect('sel_location', locNames);
   const teamNames = MASTER.team.map(t => t.name);
   populateSelect('sel_pm', teamNames);
- 
+
   // Render hazard conditions
   renderHazards();
- 
+
   // Init signature pads
   for (let i = 0; i < 8; i++) initSigPad('sig_' + i);
   initSigPad('sig_super');
- 
+
 }
- 
+
 function populateSelect(id, items) {
   const sel = document.getElementById(id);
   items.forEach(item => {
@@ -787,20 +787,20 @@ function populateSelect(id, items) {
     sel.appendChild(o);
   });
 }
- 
+
 function toggleOther(field, on) {
   const wrap = document.getElementById('wrap_' + field);
   if (on) wrap.classList.add('oth-on');
   else wrap.classList.remove('oth-on');
 }
- 
+
 function getFieldVal(field) {
   const wrap = document.getElementById('wrap_' + field);
   if (!wrap) return document.getElementById(field)?.value || '';
   if (wrap.classList.contains('oth-on')) return document.getElementById('oth_' + field).value;
   return document.getElementById('sel_' + field).value;
 }
- 
+
 // ─── YES/NO TOGGLES ───
 function ynToggle(btn, fieldId, val) {
   const hidden = document.getElementById(fieldId);
@@ -813,7 +813,7 @@ function ynToggle(btn, fieldId, val) {
     btn.className = val === 'Y' ? 'sel-y' : 'sel-n';
   }
 }
- 
+
 // ─── EQUIPMENT TOGGLES ───
 function eqToggle(el) {
   if (event.target.tagName === 'INPUT' && event.target.type !== 'checkbox') return;
@@ -821,9 +821,9 @@ function eqToggle(el) {
   if (event.target !== cb) cb.checked = !cb.checked;
   el.classList.toggle('checked', cb.checked);
 }
- 
+
 // ─── SIGNATURE PADS ───
- 
+
 // --- DRAWING CANVAS (FULL TOOLBAR) ---
 const drawState = {
   tool: 'pen', color: '#1e1e1e', size: 3,
@@ -831,13 +831,13 @@ const drawState = {
   history: [], historyIdx: -1
 };
 let mainCtx = null, prevCtx = null, mainCv = null, prevCv = null;
- 
+
 function toggleDrawCanvas(on) {
   const w = document.getElementById('riggingCanvasWrap');
   if (w) w.style.display = on ? 'block' : 'none';
   if (on) initDrawCanvas();
 }
- 
+
 function initDrawCanvas() {
   mainCv = document.getElementById('drawCanvas');
   prevCv = document.getElementById('drawPreview');
@@ -855,7 +855,7 @@ function initDrawCanvas() {
   mainCtx.fillStyle = '#fff';
   mainCtx.fillRect(0, 0, w, h);
   saveHistory();
- 
+
   // Tool buttons
   document.querySelectorAll('#drawTools .dt').forEach(btn => {
     btn.addEventListener('click', () => {
@@ -865,33 +865,33 @@ function initDrawCanvas() {
       prevCv.style.cursor = drawState.tool === 'eraser' ? 'cell' : 'crosshair';
     });
   });
- 
+
   // Pointer events on preview canvas
   prevCv.addEventListener('pointerdown', onDrawStart);
   prevCv.addEventListener('pointermove', onDrawMove);
   prevCv.addEventListener('pointerup', onDrawEnd);
   prevCv.addEventListener('pointerleave', onDrawEnd);
 }
- 
+
 function pos(e) {
   const b = prevCv.getBoundingClientRect();
   return { x: (e.clientX - b.left) * prevCv.width / b.width, y: (e.clientY - b.top) * prevCv.height / b.height };
 }
- 
+
 function applyStyle(ctx, opts) {
   ctx.strokeStyle = opts.eraser ? '#fff' : drawState.color;
   ctx.fillStyle = drawState.color;
   ctx.lineWidth = opts.eraser ? drawState.size * 4 : drawState.size;
   ctx.setLineDash(opts.dash ? [8, 6] : []);
 }
- 
+
 function onDrawStart(e) {
   e.preventDefault();
   const p = pos(e);
   drawState.drawing = true;
   drawState.startX = p.x;
   drawState.startY = p.y;
- 
+
   if (drawState.tool === 'text') {
     drawState.drawing = false;
     const label = prompt('Enter label text:');
@@ -904,31 +904,31 @@ function onDrawStart(e) {
     }
     return;
   }
- 
+
   if (drawState.tool === 'pen' || drawState.tool === 'eraser') {
     applyStyle(mainCtx, { eraser: drawState.tool === 'eraser' });
     mainCtx.beginPath();
     mainCtx.moveTo(p.x, p.y);
   }
 }
- 
+
 function onDrawMove(e) {
   if (!drawState.drawing) return;
   e.preventDefault();
   const p = pos(e);
   const t = drawState.tool;
- 
+
   if (t === 'pen' || t === 'eraser') {
     mainCtx.lineTo(p.x, p.y);
     mainCtx.stroke();
     return;
   }
- 
+
   // Shape preview
   prevCtx.clearRect(0, 0, prevCv.width, prevCv.height);
   applyStyle(prevCtx, { dash: t === 'dash' });
   const sx = drawState.startX, sy = drawState.startY;
- 
+
   if (t === 'line' || t === 'dash') {
     prevCtx.beginPath();
     prevCtx.moveTo(sx, sy);
@@ -948,23 +948,23 @@ function onDrawMove(e) {
   }
   prevCtx.setLineDash([]);
 }
- 
+
 function onDrawEnd(e) {
   if (!drawState.drawing) return;
   drawState.drawing = false;
   const t = drawState.tool;
- 
+
   if (t === 'pen' || t === 'eraser') {
     mainCtx.closePath();
     saveHistory();
     return;
   }
- 
+
   // Commit preview to main canvas
   const p = pos(e);
   applyStyle(mainCtx, { dash: t === 'dash' });
   const sx = drawState.startX, sy = drawState.startY;
- 
+
   if (t === 'line' || t === 'dash') {
     mainCtx.beginPath();
     mainCtx.moveTo(sx, sy);
@@ -986,7 +986,7 @@ function onDrawEnd(e) {
   prevCtx.clearRect(0, 0, prevCv.width, prevCv.height);
   saveHistory();
 }
- 
+
 function drawArrow(ctx, x1, y1, x2, y2) {
   const headLen = Math.max(12, drawState.size * 4);
   const angle = Math.atan2(y2 - y1, x2 - x1);
@@ -1001,7 +1001,7 @@ function drawArrow(ctx, x1, y1, x2, y2) {
   ctx.lineTo(x2 - headLen * Math.cos(angle + Math.PI / 6), y2 - headLen * Math.sin(angle + Math.PI / 6));
   ctx.stroke();
 }
- 
+
 function saveHistory() {
   if (!mainCv) return;
   drawState.historyIdx++;
@@ -1009,7 +1009,7 @@ function saveHistory() {
   drawState.history.push(mainCv.toDataURL());
   if (drawState.history.length > 30) { drawState.history.shift(); drawState.historyIdx--; }
 }
- 
+
 function drawUndo() {
   if (drawState.historyIdx <= 0 || !mainCv) return;
   drawState.historyIdx--;
@@ -1017,7 +1017,7 @@ function drawUndo() {
   img.onload = () => { mainCtx.clearRect(0, 0, mainCv.width, mainCv.height); mainCtx.drawImage(img, 0, 0); };
   img.src = drawState.history[drawState.historyIdx];
 }
- 
+
 function clearDrawCanvas() {
   if (!mainCv) return;
   mainCtx.fillStyle = '#fff';
@@ -1025,21 +1025,21 @@ function clearDrawCanvas() {
   prevCtx.clearRect(0, 0, prevCv.width, prevCv.height);
   saveHistory();
 }
- 
+
 function getDrawCanvasData() {
   if (!mainCv) return null;
   const px = mainCtx.getImageData(0, 0, mainCv.width, mainCv.height).data;
   for (let i = 0; i < px.length; i += 4) { if (px[i] < 255 || px[i+1] < 255 || px[i+2] < 255) return mainCv.toDataURL('image/png'); }
   return null;
 }
- 
+
 function initSigPad(canvasId) {
   const canvas = document.getElementById(canvasId);
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
   const wrap = canvas.parentElement;
   let drawing = false;
- 
+
   function resize() {
     const rect = wrap.getBoundingClientRect();
     canvas.width = rect.width;
@@ -1051,13 +1051,13 @@ function initSigPad(canvasId) {
   }
   resize();
   window.addEventListener('resize', resize);
- 
+
   function getPos(e) {
     const rect = canvas.getBoundingClientRect();
     const touch = e.touches ? e.touches[0] : e;
     return { x: touch.clientX - rect.left, y: touch.clientY - rect.top };
   }
- 
+
   function start(e) {
     e.preventDefault();
     drawing = true;
@@ -1065,7 +1065,7 @@ function initSigPad(canvasId) {
     ctx.beginPath();
     ctx.moveTo(p.x, p.y);
   }
- 
+
   function move(e) {
     if (!drawing) return;
     e.preventDefault();
@@ -1073,9 +1073,9 @@ function initSigPad(canvasId) {
     ctx.lineTo(p.x, p.y);
     ctx.stroke();
   }
- 
+
   function stop() { drawing = false; }
- 
+
   canvas.addEventListener('mousedown', start);
   canvas.addEventListener('mousemove', move);
   canvas.addEventListener('mouseup', stop);
@@ -1083,20 +1083,20 @@ function initSigPad(canvasId) {
   canvas.addEventListener('touchstart', start, {passive:false});
   canvas.addEventListener('touchmove', move, {passive:false});
   canvas.addEventListener('touchend', stop);
- 
+
   sigPads[canvasId] = { canvas, ctx, resize };
 }
- 
+
 function clearSig(idx) {
   const pad = sigPads['sig_' + idx];
   if (pad) { pad.ctx.clearRect(0, 0, pad.canvas.width, pad.canvas.height); }
 }
- 
+
 function clearSigById(id) {
   const pad = sigPads[id];
   if (pad) { pad.ctx.clearRect(0, 0, pad.canvas.width, pad.canvas.height); }
 }
- 
+
 function getSigDataURL(id) {
   const pad = sigPads[id];
   if (!pad) return '';
@@ -1105,7 +1105,7 @@ function getSigDataURL(id) {
   for (let i = 3; i < px.length; i += 4) { if (px[i] > 0) return pad.canvas.toDataURL(); }
   return '';
 }
- 
+
 // ─── RENDER HAZARDS ───
 function renderHazards() {
   const container = document.getElementById('hazardList');
@@ -1133,7 +1133,7 @@ function renderHazards() {
     container.appendChild(div);
   });
 }
- 
+
 // ─── ADD ROWS ───
 function addRescueRow() {
   const container = document.getElementById('rescueRows');
@@ -1142,15 +1142,15 @@ function addRescueRow() {
   row.innerHTML = '<input type="text" placeholder="Location"><textarea placeholder="Rescue plan steps..."></textarea><input type="text" placeholder="Required gear">';
   container.appendChild(row);
 }
- 
- 
+
+
 // ─── BUILD REPORT ───
 function getFN() {
   const d = document.getElementById('jhaDate').value.replace(/-/g,'').slice(2);
   const proj = getFieldVal('project').replace(/[^a-zA-Z0-9_-]/g,'').slice(0,30) || 'JHA';
   return d + '_JHA_' + proj;
 }
- 
+
 function buildReport() {
   const d = {
     project: getFieldVal('project'),
@@ -1199,7 +1199,7 @@ function buildReport() {
     lessonsLearned: document.getElementById('lessonsLearned').value,
     dateClosed: document.getElementById('dateClosed').value,
   };
- 
+
   // Collect team
   d.team = [];
   for (let i = 0; i < 8; i++) {
@@ -1209,7 +1209,7 @@ function buildReport() {
     const roles = ['Prepared By','RA Supervisor','Technician','Technician','Technician','Technician','Technician','Technician'];
     if (name) d.team.push({ role: roles[i], name, phone, sig });
   }
- 
+
   // Collect equipment
   d.equipment = [];
   const eqItems = [
@@ -1227,7 +1227,7 @@ function buildReport() {
   });
   d.addlEquip = document.getElementById('addlEquip').value;
   d.addlPPE = document.getElementById('addlPPE').value;
- 
+
   // Collect checked hazards
   d.hazards = [];
   HAZARDS.forEach((h, i) => {
@@ -1247,7 +1247,7 @@ function buildReport() {
       });
     }
   });
- 
+
   // Custom hazards
   ['customHaz1','customHaz2'].forEach(id => {
     const el = document.getElementById(id);
@@ -1259,20 +1259,20 @@ function buildReport() {
       }
     }
   });
- 
+
   // Rescue rows
   d.rescues = [];
   document.querySelectorAll('#rescueRows .rescue-row').forEach(row => {
     const inputs = row.querySelectorAll('input,textarea');
     if (inputs[0]?.value) d.rescues.push({ location: inputs[0].value, plan: inputs[1].value, gear: inputs[2].value });
   });
- 
+
   d.superSig = getSigDataURL('sig_super');
- 
+
   const fn = getFN();
   const now = new Date().toLocaleString('en-US', {dateStyle:'medium',timeStyle:'short'});
   const ynBadge = v => v === 'Y' ? '<span style="color:#2d5a14;font-weight:700">✓ Yes</span>' : v === 'N' ? '<span style="color:#c0392b;font-weight:700">✗ No</span>' : '<span style="color:#888">—</span>';
- 
+
   // ─── GENERATE HTML REPORT ───
   let h = `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>${fn}</title>
 <style>
@@ -1304,9 +1304,9 @@ table.t td{padding:6px 10px;border-bottom:1px solid #eee}
 .val{font-size:10pt;margin-bottom:8px}
 .val.pre{white-space:pre-wrap}
 </style></head><body>`;
- 
+
   h += `<div class="hdr"><h1>Job Hazard Analysis (JHA) & Rope-Access Work Plan</h1><div class="ref">OMS_0010_JHA&WorkPlan &bull; Rev 6 &bull; ${d.date}</div></div>`;
- 
+
   // Meta - simple stacked layout, no grid
   h += `<div class="meta">
     <div class="mi"><span class="ml">Project:</span> <span class="mv">${d.project||'—'}</span> &nbsp;&nbsp; <span class="ml">Date:</span> <span class="mv">${d.date||'—'}</span> &nbsp;&nbsp; <span class="ml">Time:</span> <span class="mv">${d.time||'—'}</span></div>
@@ -1315,19 +1315,19 @@ table.t td{padding:6px 10px;border-bottom:1px solid #eee}
     <div class="mi"><span class="ml">Site Contact:</span> <span class="mv">${d.siteContact||'—'} ${d.sitePhone?'• '+d.sitePhone:''}</span> &nbsp;&nbsp; <span class="ml">ORAS PM:</span> <span class="mv">${d.pm||'—'} ${d.pmPhone?'• '+d.pmPhone:''}</span></div>
     <div class="mi"><span class="ml">Generated:</span> <span class="mv">${now}</span></div>
   </div>`;
- 
+
   // Emergency
   h += `<div class="sec"><div class="sec-t red">Emergency Information</div><div class="sec-c">
     <div class="row2"><div class="row2-item"><div class="lbl">EAP Contact</div><div class="val">${d.eapContact||'—'}</div></div><div class="row2-item"><div class="lbl">EAP Rescue Kit</div><div class="val">${d.eapKit||'—'}</div></div></div>
     <div class="row2"><div class="row2-item"><div class="lbl">Site Radio</div><div class="val">${d.siteRadio||'—'}</div></div><div class="row2-item"><div class="lbl">Team Radio</div><div class="val">${d.teamRadio||'—'}</div></div></div>
   <div class="lbl">Notes for Rescue and Access</div><div class="val pre">${d.emsAccess||'—'}</div>
   <div class="lbl">Other Comms</div><div class="val">${ynBadge(d.otherComm)}</div></div></div>`;
- 
+
   // Wind
   h += `<div class="sec"><div class="sec-t">Wind Assessment</div><div class="sec-c">
     <div class="lbl">Weather & wind speeds discussed?</div><div class="val">${ynBadge(d.windDiscussed)}</div>
     ${d.windNotes ? '<div class="lbl" style="margin-top:8px">Site Specific Notes</div><div class="val">'+d.windNotes+'</div>' : ''}</div></div>`;
- 
+
   // Water
   if (d.wowActive === 'Y') {
     h += `<div class="sec"><div class="sec-t">Working Over Water</div><div class="sec-c">
@@ -1336,12 +1336,12 @@ table.t td{padding:6px 10px;border-bottom:1px solid #eee}
       <div class="row2"><div class="row2-item"><div class="lbl">Water Temp</div><div class="val">${d.waterTemp||'—'}</div></div><div class="row2-item"><div class="lbl">Contact/Radio</div><div class="val">${d.waterRadio||'—'}</div></div></div>
     ${d.waterRestrictions?'<div class="lbl">Restrictions</div><div class="val">'+d.waterRestrictions+'</div>':''}</div></div>`;
   }
- 
+
   // Work scope
   h += `<div class="sec"><div class="sec-t">Work Scope</div><div class="sec-c">
     <div class="lbl">Description of Work</div><div class="val pre">${d.workDesc||'—'}</div>
     <div class="lbl">Rope-Access Methods</div><div class="val pre">${d.ropeMethods||'—'}</div></div></div>`;
- 
+
   // Equipment
   if (d.equipment.length || d.addlEquip || d.addlPPE) {
     h += `<div class="sec"><div class="sec-t">Job/Task Equipment</div><div class="sec-c">`;
@@ -1352,31 +1352,31 @@ table.t td{padding:6px 10px;border-bottom:1px solid #eee}
     if (d.addlPPE) h += `<div class="lbl">Additional PPE</div><div class="val">${d.addlPPE}</div>`;
     h += `</div></div>`;
   }
- 
+
   // SDS
   h += `<div class="sec"><div class="sec-t amber">SDS — Safety Data Sheets</div><div class="sec-c">
     <div class="lbl">All SDS available & discussed</div><div class="val">${ynBadge(d.sdsVerified)}</div></div></div>`;
- 
+
   // Anchors
   if (d.anchors) h += `<div class="sec"><div class="sec-t">Anchors</div><div class="sec-c"><div class="val pre">${d.anchors}</div></div></div>`;
- 
+
   // LOTO
   h += `<div class="sec"><div class="sec-t amber">LOTO</div><div class="sec-c">
     <div class="lbl">LOTO Required</div><div class="val">${ynBadge(d.lotoNeeded)}</div>
     ${d.lotoNeeded==='Y'?'<div class="row2"><div class="row2-item"><div class="lbl">Permit #</div><div class="val">'+d.lotoPermit+'</div></div><div class="row2-item"><div class="lbl">Supervisor</div><div class="val">'+d.lotoSupervisor+'</div></div></div>':''}</div></div>`;
- 
+
   // Confined space
   h += `<div class="sec"><div class="sec-t amber">Confined Space</div><div class="sec-c">
     <div class="lbl">Permit Required</div><div class="val">${ynBadge(d.csPermitReq)}</div>
     ${d.csPermitReq==='Y'?'<div class="lbl">Permit #</div><div class="val">'+d.csPermit+'</div>':''}</div></div>`;
- 
+
   // Tool mgmt, power ascender, zones
   if (d.toolMgmt) h += `<div class="sec"><div class="sec-t">Equipment/Tool Management</div><div class="sec-c"><div class="val pre">${d.toolMgmt}</div></div></div>`;
   h += `<div class="sec"><div class="sec-t">Power Ascender</div><div class="sec-c"><div class="val">${ynBadge(d.powerAsc)}${d.powerAsc==='Y'?'<div style="margin-top:6px;font-size:10px">'+(d.paPreUse?'☑':'☐')+' Pre-Use Inspection completed &nbsp;&nbsp;'+(d.paCertified?'☑':'☐')+' Operator certification/training verified</div>':''}</div></div></div>`;
   h += `<div class="sec"><div class="sec-t red">Work Zones - Rope Access</div><div class="sec-c">
     <div class="lbl" style="margin-top:6px">Access Zone</div><div class="val pre">${d.accessZone||'—'}</div>
     <div class="lbl" style="margin-top:6px">Hazard Zone</div><div class="val pre">${d.hazardZone||'—'}</div></div></div>`;
- 
+
   // Rescue
   if (d.rescues.length) {
     h += `<div class="sec"><div class="sec-t red">Rescue Planning</div><div class="sec-c">`;
@@ -1385,14 +1385,14 @@ table.t td{padding:6px 10px;border-bottom:1px solid #eee}
     d.rescues.forEach(r => { h += `<tr><td>${r.location}</td><td>${r.plan}</td><td>${r.gear}</td></tr>`; });
     h += `</tbody></table></div></div>`;
   }
- 
+
   // Rigging
   h += `<div class="sec"><div class="sec-t">Rigging Plan</div><div class="sec-c">`;
   if (d.riggingPlan) h += `<div class="val pre">${d.riggingPlan}</div>`;
   const drawImg = typeof getDrawCanvasData === 'function' ? getDrawCanvasData() : null;
   if (drawImg) h += `<div style="margin-top:10px"><div class="lbl">Rigging Sketch</div><img src="${drawImg}" style="max-width:100%;border:1px solid #ddd;border-radius:4px;margin-top:6px"></div>`;
   if (d.riggingPlan || drawImg) h += `</div></div>`;
- 
+
   // Hazards
   if (d.hazards.length) {
     h += `<div class="sec"><div class="sec-t amber">Hazard Conditions (${d.hazards.length} identified)</div><div class="sec-c">`;
@@ -1405,7 +1405,7 @@ table.t td{padding:6px 10px;border-bottom:1px solid #eee}
     });
     h += `</div></div>`;
   }
- 
+
   // Team Sign-In (placed after content so team reads full JHA first)
   if (d.team.length) {
     h += `<div class="sec"><div class="sec-t">Team Sign-In</div><div class="sec-c"><table class="t"><thead><tr><th>Role</th><th>Name</th><th>Phone</th><th>Signature</th></tr></thead><tbody>`;
@@ -1414,28 +1414,28 @@ table.t td{padding:6px 10px;border-bottom:1px solid #eee}
     });
     h += `</tbody></table></div></div>`;
   }
- 
+
   // Lessons learned
   if (d.lessonsLearned) h += `<div class="sec"><div class="sec-t">Lessons Learned</div><div class="sec-c"><div class="val pre">${d.lessonsLearned}</div></div></div>`;
- 
+
   // Close-out
   h += `<div class="sec"><div class="sec-t">Close-Out</div><div class="sec-c">
     <div class="row2"><div class="row2-item"><div class="lbl">Supervisor Signature</div><div class="val">${d.superSig?'<img class="sig-img" src="'+d.superSig+'">':'—'}</div></div><div class="row2-item"><div class="lbl">Date Closed</div><div class="val">${d.dateClosed||'—'}</div></div></div></div></div>`;
- 
+
   h += `<div class="ft">Optimum Rope Access Solutions — Confidential — ${fn} — ${now}</div>`;
   h += `</body></html>`;
- 
+
   reportHTML = h;
   return { html: h, filename: fn, data: d, now };
 }
- 
+
 // ─── SUBMIT ───
- 
+
 // --- MANDATORY FIELD VALIDATION ---
 function validateJHA() {
   const missing = [];
   const v = id => { const el = document.getElementById(id); return el ? (el.value || '').trim() : ''; };
- 
+
   // Project Info - All
   const pWrap = document.getElementById('wrap_project');
   if (pWrap && pWrap.classList.contains('oth-on')) { if (!v('oth_project')) missing.push('Project Name'); }
@@ -1461,28 +1461,28 @@ function validateJHA() {
   else { const s = document.getElementById('sel_pm'); if (!s || !s.value) missing.push('Project Manager'); }
   
   if (!v('pmPhone')) missing.push('PM Phone');
- 
+
   // Emergency Info
   if (!v('eapContact')) missing.push('EAP Contact');
   if (!v('eapKit')) missing.push('EAP Rescue Kit Location');
   if (!v('siteRadio')) missing.push('Site Radio Channel');
   if (!v('teamRadio')) missing.push('Team Radio Channel');
- 
+
   // Work Scope - All
   if (!v('workDesc')) missing.push('Work Description');
   if (!v('ropeMethods')) missing.push('Rope Access Methods');
- 
+
   // LOTO
   const loto = document.getElementById('lotoNeeded');
   if (loto && !loto.value) missing.push('LOTO (Yes/No required)');
- 
+
   // Confined Space
   const cs = document.getElementById('csPermitReq');
   if (cs && !cs.value) missing.push('Confined Space (Permit question required)');
- 
+
   // Equip & Tool Management
   if (!v('toolMgmt')) missing.push('Equipment/Tool Management');
- 
+
   // Rescue Planning
   if (!v('emergRadio')) missing.push('Rescue Planning - Radio Channel');
   let hasRescue = false;
@@ -1490,11 +1490,11 @@ function validateJHA() {
     row.querySelectorAll('input, textarea').forEach(inp => { if ((inp.value||'').trim()) hasRescue = true; });
   });
   if (!hasRescue) missing.push('Rescue Planning - At least 1 Location / Plan entry');
- 
+
   // Hazard Conditions - min 3
   const hazCount = document.querySelectorAll('.haz-item.checked').length;
   if (hazCount < 3) missing.push('Hazard Conditions (minimum 3 required, currently ' + hazCount + ')');
- 
+
   // Team Signatures
   if (!v('team_0_name')) missing.push('Team Sign-In (at least 1 member name)');
   const sig0 = document.querySelector('#sig_0 canvas');
@@ -1504,7 +1504,7 @@ function validateJHA() {
     for (let i = 3; i < px0.length; i += 4) { if (px0[i] > 0) { has0 = true; break; } }
     if (!has0) missing.push('Team Sign-In (at least 1 signature)');
   }
- 
+
   // Closeout Signatures
   const sigS = document.querySelector('#sig_super canvas');
   if (sigS) {
@@ -1513,15 +1513,38 @@ function validateJHA() {
     for (let i = 3; i < pxS.length; i += 4) { if (pxS[i] > 0) { hasS = true; break; } }
     if (!hasS) missing.push('Close-Out Supervisor Signature');
   }
- 
+
   return missing;
 }
- 
+
 function submitJHA() {
   const missing = validateJHA();
   if (missing.length > 0) { alert("Please complete the following required fields:\n\n" + missing.map(m=>"• "+m).join("\n")); return; }
   const report = buildReport();
- 
+  const fn = getFN();
+
+  // POST to Power Automate webhook
+  const payload = {
+    filename: fn,
+    reportHTML: reportHTML,
+    submittedAt: new Date().toISOString(),
+    project: getFieldVal('project'),
+    date: document.getElementById('jhaDate').value,
+    site: document.getElementById('site').value,
+    preparedBy: document.getElementById('team_0_name').value
+  };
+
+  fetch(WEBHOOK_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    mode: 'no-cors',
+    body: JSON.stringify(payload)
+  }).then(() => {
+    console.log('JHA submitted to Power Automate');
+  }).catch(err => {
+    console.warn('Webhook error (report still saved locally):', err);
+  });
+
   // Open report in new window for PDF save
   const w = window.open('', '_blank');
   if (w) {
@@ -1529,20 +1552,19 @@ function submitJHA() {
     w.document.close();
     w.onload = function() { w.print(); };
   } else {
-    // Fallback: show preview overlay and print
     document.getElementById('pb').innerHTML = reportHTML;
     document.getElementById('po').classList.add('on');
     document.body.style.overflow = 'hidden';
     window.print();
   }
- 
+
   // Show post-submit panel after brief delay
   setTimeout(() => {
     const ps = document.getElementById('postSubmit');
     if (ps) ps.style.display = 'flex';
   }, 500);
 }
- 
+
 function sendJHAEmail() {
   const proj = getFieldVal('project') || 'JHA';
   const dt = document.getElementById('jhaDate').value || '';
@@ -1552,25 +1574,25 @@ function sendJHAEmail() {
   const prepName = document.getElementById('team_0_name').value || '';
   const prepEmail = document.getElementById('prepEmail').value || '';
   const ccEmail = document.getElementById('ccEmail').value || '';
- 
+
   const subject = encodeURIComponent('JHA — ' + proj + ' — ' + dt + (site ? ' — ' + site : ''));
   const lines = ['Please find the completed JHA attached for review.','','Project: '+proj,'Date: '+dt,'Site: '+site];
   if (loc) lines.push('Location: '+loc);
   if (pm) lines.push('Project Manager: '+pm);
   lines.push('','Prepared by: '+prepName,'','---','Please attach the saved PDF to this email before sending.');
   const body = encodeURIComponent(lines.join(String.fromCharCode(10)));
- 
+
   const to = ccEmail || '';
   const cc = prepEmail || '';
   window.location.href = 'mailto:' + to + '?cc=' + cc + '&subject=' + subject + '&body=' + body;
 }
- 
+
 function closePostSubmit() {
   const ps = document.getElementById('postSubmit');
   if (ps) ps.style.display = 'none';
 }
- 
- 
+
+
 // ─── UI HELPERS ───
 function toast(msg, err) {
   const t = document.getElementById('toast');
@@ -1578,13 +1600,13 @@ function toast(msg, err) {
   t.className = err ? 'toast error show' : 'toast show';
   setTimeout(() => t.classList.remove('show'), 4000);
 }
- 
+
 function closePrint() {
   document.getElementById('po').classList.remove('on');
   document.body.style.overflow = '';
   document.title = 'Optimum — JHA & Work Plan';
 }
- 
+
 function clearForm() {
   if (!confirm('Clear all fields? This cannot be undone.')) return;
   document.querySelectorAll('input[type=text],input[type=number],input[type=email],input[type=tel],textarea').forEach(el => el.value = '');
@@ -1610,7 +1632,7 @@ function clearForm() {
   clearSigById('sig_super');
   reportHTML = '';
 }
- 
+
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closePrint(); });
 init();
 </script>
