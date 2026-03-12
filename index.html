@@ -1524,36 +1524,43 @@ function submitJHA() {
   const report = buildReport();
   const fn = getFN();
 
-  // Generate PDF from report HTML, then send to Power Automate
+  // Generate PDF from report HTML using hidden iframe
   toast('Generating PDF...');
-  const container = document.createElement('div');
-  container.innerHTML = reportHTML;
-  container.style.cssText = 'position:absolute;left:-9999px;top:0;width:8.5in;background:#fff';
-  document.body.appendChild(container);
+  const iframe = document.createElement('iframe');
+  iframe.style.cssText = 'position:fixed;left:-9999px;top:0;width:8.5in;height:11in;border:none';
+  document.body.appendChild(iframe);
+  iframe.contentDocument.open();
+  iframe.contentDocument.write(reportHTML);
+  iframe.contentDocument.close();
 
-  html2pdf().set({
-    margin: [0.4, 0.4, 0.4, 0.4],
-    filename: fn + '.pdf',
-    image: { type: 'jpeg', quality: 0.92 },
-    html2canvas: { scale: 2, useCORS: true, letterRendering: true },
-    jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' },
-    pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
-  }).from(container).outputPdf('datauristring').then(pdfDataUri => {
-    document.body.removeChild(container);
-
-    // Extract base64 from data URI
-    const pdfBase64 = pdfDataUri.split(',')[1];
-
-    const payload = {
-      formType: 'JHA',
+  // Wait for iframe to render (images, styles)
+  setTimeout(() => {
+    const iframeBody = iframe.contentDocument.body;
+    html2pdf().set({
+      margin: [0.3, 0.3, 0.3, 0.3],
       filename: fn + '.pdf',
-      pdfBase64: pdfBase64,
-      submittedAt: new Date().toISOString(),
-      project: getFieldVal('project'),
-      date: document.getElementById('jhaDate').value,
-      site: document.getElementById('site').value,
-      preparedBy: document.getElementById('team_0_name').value
-    };
+      image: { type: 'jpeg', quality: 0.85 },
+      html2canvas: { scale: 1.5, useCORS: true, letterRendering: true, scrollY: 0, windowWidth: 816 },
+      jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' },
+      pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+    }).from(iframeBody).outputPdf('datauristring').then(pdfDataUri => {
+      document.body.removeChild(iframe);
+
+      // Extract base64 from data URI
+      const pdfBase64 = pdfDataUri.split(',')[1];
+
+      const payload = {
+        formType: 'JHA',
+        filename: fn + '.pdf',
+        pdfBase64: pdfBase64,
+        submittedAt: new Date().toISOString(),
+        project: getFieldVal('project'),
+        date: document.getElementById('jhaDate').value,
+        site: document.getElementById('site').value,
+        preparedBy: document.getElementById('team_0_name').value,
+        prepEmail: document.getElementById('prepEmail').value || '',
+        ccEmail: document.getElementById('ccEmail').value || ''
+      };
 
     // Send PDF to Power Automate
     fetch(WEBHOOK_URL, {
@@ -1595,13 +1602,14 @@ function submitJHA() {
 
   }).catch(err => {
     console.error('PDF generation error:', err);
-    document.body.removeChild(container);
+    document.body.removeChild(iframe);
     toast('PDF generation failed - saving locally', true);
     // Fallback: open print dialog
     const w = window.open('', '_blank');
     if (w) { w.document.write(reportHTML); w.document.close(); w.onload = function() { w.print(); }; }
     setTimeout(() => { const ps = document.getElementById('postSubmit'); if (ps) ps.style.display = 'flex'; }, 500);
   });
+  }, 1500); // Wait for iframe to render before PDF capture
 }
 
 function sendJHAEmail() {
