@@ -1566,31 +1566,20 @@ async function submitJHA() {
 
   toast('Generating PDF...');
 
-  // Style preview container for consistent PDF capture (same as DFR)
-  const previewEl = document.getElementById('pb');
-  previewEl.style.width = '760px';
-  previewEl.style.maxWidth = '760px';
-  previewEl.style.overflow = 'visible';
-
-  // Wait for fonts and images to render
-  await document.fonts.ready;
-  await new Promise(r => setTimeout(r, 500));
-
   try {
-    // Generate PDF from the styled preview (DFR pattern)
+    // Generate PDF from full HTML string (same approach as Blade Report)
+    // html2pdf renders in its own iframe — no CSS conflicts with the form
+    await document.fonts.ready;
+    await new Promise(r => setTimeout(r, 300));
+
     const pdfBlob = await html2pdf().set({
       margin: [0.3, 0.3, 0.4, 0.3],
       filename: fn + '.pdf',
       image: { type: 'jpeg', quality: 0.92 },
-      html2canvas: { scale: 2, useCORS: true, logging: false, scrollY: 0, windowWidth: 760 },
+      html2canvas: { scale: 3, useCORS: true, logging: false, scrollX: 0, scrollY: 0, imageTimeout: 0 },
       jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' },
       pagebreak: { mode: ['css'], avoid: ['.haz-sec', 'tr', '.sec'] }
-    }).from(previewEl).outputPdf('blob');
-
-    // Reset preview styling
-    previewEl.style.width = '';
-    previewEl.style.maxWidth = '';
-    previewEl.style.overflow = '';
+    }).from(reportHTML, 'string').outputPdf('blob');
 
     // Auto-download PDF to device
     const dlUrl = URL.createObjectURL(pdfBlob);
@@ -1643,9 +1632,6 @@ async function submitJHA() {
 
   } catch(err) {
     console.error('PDF generation error:', err);
-    previewEl.style.width = '';
-    previewEl.style.maxWidth = '';
-    previewEl.style.overflow = '';
     toast('PDF generation failed', true);
   }
 
