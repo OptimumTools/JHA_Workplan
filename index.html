@@ -667,10 +667,12 @@ body{font-family:'Outfit',sans-serif;background:var(--d50);color:var(--d800);lin
 <div id="postSubmit" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:9999;align-items:center;justify-content:center;padding:20px">
   <div style="background:#fff;border-radius:14px;max-width:440px;width:100%;padding:28px;text-align:center;box-shadow:0 12px 40px rgba(0,0,0,.25)">
     <div style="font-size:48px;margin-bottom:8px">✅</div>
-    <h2 style="font-size:20px;color:var(--g700);margin:0 0 6px">JHA Saved</h2>
-    <p style="font-size:13px;color:var(--d500);margin:0 0 20px">Your PDF has been generated. Attach it to the email below to send to the team.</p>
-    <button id="emailBtn" onclick="sendJHAEmail()" style="width:100%;padding:14px;font-size:14px;font-weight:700;color:#fff;background:var(--g600);border:none;border-radius:8px;cursor:pointer;margin-bottom:10px">📧 Send JHA via Email</button>
-    <div style="font-size:10px;color:var(--d400);margin-bottom:16px">Opens your email app with To, Subject, and body pre-filled. Attach the PDF you just saved.</div>
+    <h2 style="font-size:20px;color:var(--g700);margin:0 0 6px">JHA Submitted</h2>
+    <p style="font-size:13px;color:var(--d500);margin:0 0 20px">PDF generated and sent to SharePoint. Save or share below.</p>
+    <button id="dlBtn" onclick="downloadJHAPDF()" style="width:100%;padding:14px;font-size:14px;font-weight:700;color:#fff;background:var(--g600);border:none;border-radius:8px;cursor:pointer;margin-bottom:10px">💾 Save PDF</button>
+    <button id="shareBtn" onclick="shareJHAPDF()" style="width:100%;padding:14px;font-size:14px;font-weight:700;color:#fff;background:var(--b600,#2563eb);border:none;border-radius:8px;cursor:pointer;margin-bottom:10px">📤 Share PDF</button>
+    <button id="emailBtn" onclick="sendJHAEmail()" style="width:100%;padding:12px;font-size:13px;font-weight:600;color:var(--d600);background:var(--d50);border:1px solid var(--d200);border-radius:8px;cursor:pointer;margin-bottom:10px">📧 Send via Email</button>
+    <div style="font-size:10px;color:var(--d400);margin-bottom:16px">Email opens pre-filled — attach the saved PDF before sending.</div>
     <button onclick="closePostSubmit()" style="width:100%;padding:12px;font-size:13px;font-weight:600;color:var(--d600);background:var(--d50);border:1px solid var(--d200);border-radius:8px;cursor:pointer">Done — Return to Form</button>
   </div>
 </div>
@@ -681,7 +683,8 @@ body{font-family:'Outfit',sans-serif;background:var(--d50);color:var(--d800);lin
     <div class="pt">
       <h3>JHA Preview</h3>
       <div class="btns">
-        <button class="btn btn-green" onclick="window.print()">📄 Save as PDF</button>
+        <button class="btn btn-green" onclick="downloadJHAPDF()">💾 Save PDF</button>
+        <button class="btn btn-green" onclick="shareJHAPDF()">📤 Share</button>
         <button class="btn btn-g" onclick="closePrint()" style="color:var(--d700);border-color:var(--d300)">✕ Close</button>
       </div>
     </div>
@@ -787,6 +790,7 @@ const HAZARDS = [
 // ─── STATE ───
 let reportHTML = '';
 let bodyReportHTML = '';
+let lastPdfBlob = null;
 const sigPads = {};
 
 // ─── INIT ───
@@ -1564,15 +1568,19 @@ async function submitJHA() {
   document.body.style.overflow = 'hidden';
   document.title = fn;
 
-  toast('Generating PDF...');
+  // Show share button if available
+  if (navigator.share && navigator.canShare) {
+    const sb = document.getElementById('shareBtn');
+    if (sb) sb.style.display = '';
+  }
+
+  toast('\u23f3 Generating PDF...');
 
   try {
-    // Generate PDF from full HTML string (same approach as Blade Report)
-    // html2pdf renders in its own iframe — no CSS conflicts with the form
     await document.fonts.ready;
     await new Promise(r => setTimeout(r, 300));
 
-    const pdfBlob = await html2pdf().set({
+    lastPdfBlob = await html2pdf().set({
       margin: [0.3, 0.3, 0.4, 0.3],
       filename: fn + '.pdf',
       image: { type: 'jpeg', quality: 0.92 },
@@ -1581,58 +1589,14 @@ async function submitJHA() {
       pagebreak: { mode: ['css'], avoid: ['.haz-sec', 'tr', '.sec'] }
     }).from(reportHTML, 'string').outputPdf('blob');
 
-    // Auto-download PDF to device
-    const dlUrl = URL.createObjectURL(pdfBlob);
-    const a = document.createElement('a');
-    a.href = dlUrl; a.download = fn + '.pdf'; a.style.display = 'none';
-    document.body.appendChild(a); a.click();
-    setTimeout(() => { document.body.removeChild(a); URL.revokeObjectURL(dlUrl); }, 1000);
-    toast('PDF saved to device');
+    const pdfBase64 = await blobToBase64(lastPdfBlob);
+    await queueReport(report, pdfBase64);
 
-    // Convert PDF to base64 for Power Automate
-    const pdfBase64 = await new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload = () => resolve(reader.result.split(',')[1]);
-      reader.onerror = reject;
-      reader.readAsDataURL(pdfBlob);
-    });
-
-    // Send PDF to Power Automate
-    const payload = {
-      formType: 'JHA',
-      filename: fn + '.pdf',
-      pdfBase64: pdfBase64,
-      submittedAt: new Date().toISOString(),
-      project: getFieldVal('project'),
-      date: document.getElementById('jhaDate').value,
-      site: document.getElementById('site').value,
-      preparedBy: document.getElementById('team_0_name').value,
-      prepEmail: document.getElementById('prepEmail').value || '',
-      ccEmail: document.getElementById('ccEmail').value || ''
-    };
-
-    if (navigator.onLine) {
-      fetch(WEBHOOK_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      }).then(resp => {
-        if (resp.ok) toast('JHA sent to SharePoint');
-        else {
-          fetch(WEBHOOK_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(payload) }).catch(() => {});
-          toast('JHA saved locally (syncing...)', false);
-        }
-      }).catch(() => {
-        fetch(WEBHOOK_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(payload) }).catch(() => {});
-        toast('JHA saved locally (syncing...)', false);
-      });
-    } else {
-      toast('Offline - JHA saved locally, will sync when signal returns', true);
-    }
-
+    toast('\u2705 JHA ready \u2014 tap Save PDF or Share to download');
   } catch(err) {
     console.error('PDF generation error:', err);
-    toast('PDF generation failed', true);
+    lastPdfBlob = null;
+    toast('\u26a0\ufe0f PDF generation failed', true);
   }
 
   // Show post-submit panel
@@ -1640,6 +1604,51 @@ async function submitJHA() {
     const ps = document.getElementById('postSubmit');
     if (ps) ps.style.display = 'flex';
   }, 500);
+}
+
+function blobToBase64(blob) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result.split(',')[1]);
+    reader.onerror = reject;
+    reader.readAsDataURL(blob);
+  });
+}
+
+async function queueReport(report, pdfBase64) {
+  const payload = {
+    formType: 'JHA',
+    filename: report.filename + '.pdf',
+    pdfBase64: pdfBase64 || '',
+    submittedAt: new Date().toISOString(),
+    project: getFieldVal('project'),
+    date: document.getElementById('jhaDate').value,
+    site: document.getElementById('site').value,
+    preparedBy: document.getElementById('team_0_name').value,
+    prepEmail: document.getElementById('prepEmail').value || '',
+    ccEmail: document.getElementById('ccEmail').value || ''
+  };
+
+  if (navigator.onLine) {
+    try {
+      toast('\ud83d\udce4 Sending to SharePoint...');
+      const resp = await fetch(WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      if (!resp.ok) throw new Error('HTTP ' + resp.status);
+      toast('\u2705 JHA sent to SharePoint');
+      return;
+    } catch(e) {
+      console.error('Direct send failed:', e);
+      // Try no-cors fallback
+      fetch(WEBHOOK_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(payload) }).catch(() => {});
+      toast('\u26a0\ufe0f SharePoint send uncertain \u2014 use Save PDF as backup', true);
+    }
+  } else {
+    toast('\ud83d\udcf4 Offline \u2014 save PDF manually and resubmit when connected', true);
+  }
 }
 
 function sendJHAEmail() {
@@ -1667,6 +1676,59 @@ function sendJHAEmail() {
 function closePostSubmit() {
   const ps = document.getElementById('postSubmit');
   if (ps) ps.style.display = 'none';
+}
+
+function downloadJHAPDF() {
+  const fn = getFN() + '.pdf';
+  if (lastPdfBlob) {
+    const url = URL.createObjectURL(lastPdfBlob);
+    const a = document.createElement('a');
+    a.href = url; a.download = fn; a.style.display = 'none';
+    document.body.appendChild(a); a.click();
+    setTimeout(() => { document.body.removeChild(a); URL.revokeObjectURL(url); }, 1000);
+    toast('PDF downloading');
+  } else {
+    toast('Generating PDF...', false);
+    html2pdf().set({
+      margin: [0.3, 0.3, 0.4, 0.3],
+      filename: fn,
+      image: { type: 'jpeg', quality: 0.92 },
+      html2canvas: { scale: 3, useCORS: true, logging: false, scrollX: 0, scrollY: 0, imageTimeout: 0 },
+      jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' },
+      pagebreak: { mode: ['css'], avoid: ['.haz-sec', 'tr', '.sec'] }
+    }).from(reportHTML, 'string').outputPdf('blob').then(blob => {
+      lastPdfBlob = blob;
+      downloadJHAPDF();
+    }).catch(() => toast('PDF generation failed', true));
+  }
+}
+
+async function shareJHAPDF() {
+  const fn = getFN() + '.pdf';
+  if (!lastPdfBlob) {
+    try {
+      toast('Generating PDF...', false);
+      lastPdfBlob = await html2pdf().set({
+        margin: [0.3, 0.3, 0.4, 0.3],
+        filename: fn,
+        image: { type: 'jpeg', quality: 0.92 },
+        html2canvas: { scale: 3, useCORS: true, logging: false, scrollX: 0, scrollY: 0, imageTimeout: 0 },
+        jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' },
+        pagebreak: { mode: ['css'], avoid: ['.haz-sec', 'tr', '.sec'] }
+      }).from(reportHTML, 'string').outputPdf('blob');
+    } catch(e) { toast('PDF generation failed', true); return; }
+  }
+  const file = new File([lastPdfBlob], fn, { type: 'application/pdf' });
+  try {
+    if (navigator.canShare && navigator.canShare({ files: [file] })) {
+      await navigator.share({ title: fn, files: [file] });
+      toast('Shared successfully');
+    } else {
+      window.open(URL.createObjectURL(lastPdfBlob), '_blank');
+    }
+  } catch(e) {
+    if (e.name !== 'AbortError') window.open(URL.createObjectURL(lastPdfBlob), '_blank');
+  }
 }
 
 
@@ -1708,6 +1770,7 @@ function clearForm() {
   for (let i = 0; i < 8; i++) clearSig(i);
   clearSigById('sig_super');
   reportHTML = '';
+  lastPdfBlob = null;
 }
 
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closePrint(); });
